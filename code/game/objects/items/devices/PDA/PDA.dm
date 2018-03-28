@@ -784,12 +784,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //MESSENGER/NOTE FUNCTIONS===================================
 
 		if ("Edit")
-			var/n = input(U, "Please enter message", name, notehtml) as message
+			var/n = input_cp1251(U, "Please enter message", html_decode(name), notehtml)
 			if (in_range(src, U) && loc == U)
 				n = sanitizeSafe(n, extra = 0)
 				if (mode == 1)
-					note = html_decode(n)
-					notehtml = note
+					n = sanitize(n)
+					note = rustoutf(rhtml_decode(n))
+					notehtml = n
 					note = replacetext(note, "\n", "<br>")
 			else
 				ui.close()
@@ -1069,7 +1070,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(tap)
 		U.visible_message("<span class='notice'>\The [U] taps on their PDA's screen.</span>")
 	var/t = input(U, "Please enter message", P.name, null) as text
-	t = sanitize(t)
+	t = sanitizeSafe(t, extra = 0)
 	//t = readd_quotes(t)
 	t = replace_characters(t, list("&#34;" = "\""))
 	if (!t || !istype(P))
@@ -1102,8 +1103,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			to_chat(U, "ERROR: Messaging server rejected your message. Reason: contains '[send_result]'.")
 			return
 
-		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[t]", "target" = "\ref[P]")))
-		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
+		var/utf_message = rustoutf(html_decode(t))
+		tnote.Add(list(list("sent" = 1, "owner" = "[P.owner]", "job" = "[P.ownjob]", "message" = "[utf_message]", "target" = "\ref[P]")))
+		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[utf_message]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.is_preference_enabled(/datum/client_preference/ghost_ears))) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))

@@ -119,7 +119,7 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 			if(mode != VOTE_GAMEMODE || ticker.hide_mode == 0) // Here we are making sure we don't announce potential game modes
 				text = "<b>Vote Tied Between:</b>\n"
 				for(var/option in winners)
-					text += "\t[option]\n"
+					text += "\t[utf8_to_cp1251(option)]\n"
 		. = pick(winners)
 
 		for(var/key in current_votes)
@@ -229,11 +229,11 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 						choices.Add(antag.role_text)
 				choices.Add("None")
 			if(VOTE_CUSTOM)
-				question = sanitizeSafe(input(usr, "What is the vote for?") as text|null)
+				question = cp1251_to_utf8(sanitizeSafe(input(usr, "What is the vote for?") as text|null))
 				if(!question)
 					return 0
 				for(var/i = 1 to 10)
-					var/option = capitalize(sanitize(input(usr, "Please enter an option or hit cancel to finish") as text|null))
+					var/option = cp1251_to_utf8(capitalize(sanitize(input_cp1251(usr,"Please enter an option or hit cancel to finish"))))
 					if(!option || mode || !usr.client)
 						break
 					choices.Add(option)
@@ -245,7 +245,7 @@ var/global/list/round_voters = list() // Keeps track of the individuals voting f
 		started_time = world.time
 		var/text = "[capitalize(mode)] vote started by [initiator]."
 		if(mode == VOTE_CUSTOM)
-			text += "\n[question]"
+			text += "\n[utf8_to_cp1251(question)]"
 
 		log_vote(text)
 
