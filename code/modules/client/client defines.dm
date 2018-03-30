@@ -26,6 +26,10 @@
 
 	var/adminhelped = 0
 
+	var/karma = 0
+	var/karma_spent = 0
+	var/karma_tab = 0
+
 		///////////////
 		//SOUND STUFF//
 		///////////////

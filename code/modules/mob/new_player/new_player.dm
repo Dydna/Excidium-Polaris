@@ -103,6 +103,8 @@
 	if(href_list["ready"])
 		if(!ticker || ticker.current_state <= GAME_STATE_PREGAME) // Make sure we don't ready up after the round has started
 			ready = text2num(href_list["ready"])
+		if(!check_prisonlist(client))
+			to_chat(usr, "Looks like you're unwhitelisted. You will start the game as D-Class Prisoner.")
 		else
 			ready = 0
 
@@ -311,6 +313,8 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	if(job.prisonlist_job && check_prisonlist(client)) return 0
+	if(!job.prisonlist_job && !check_prisonlist(client)) return 0
 	return 1
 
 

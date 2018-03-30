@@ -12,6 +12,10 @@
 		src << "Guests may not use OOC."
 		return
 
+	if(!check_prisonlist(src))
+		to_chat(src, "<span class='danger'>Not-whitelisted may not use OOC.</span>")
+		return
+
 	msg = sanitize(msg)
 	if(!msg)	return
 

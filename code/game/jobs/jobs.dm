@@ -27,6 +27,7 @@ var/const/ROBOTICIST		=(1<<8)
 var/const/XENOBIOLOGIST		=(1<<9)
 var/const/PARAMEDIC			=(1<<10)
 
+var/const/KARMA				=(1<<3)
 
 var/const/CIVILIAN			=(1<<2)
 
@@ -43,6 +44,7 @@ var/const/LAWYER			=(1<<9)
 var/const/CHAPLAIN			=(1<<10)
 var/const/ASSISTANT			=(1<<11)
 var/const/BRIDGE			=(1<<12)
+var/const/PRISONER			=(1<<13)
 
 
 var/list/assistant_occupations = list(

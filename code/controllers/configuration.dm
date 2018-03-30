@@ -142,6 +142,8 @@ var/list/gamemode_cache = list()
 
 	var/use_loyalty_implants = 0
 
+	var/disable_karma = 0 // Disable all karma functions and unlock karma jobs by default
+
 	var/welder_vision = 1
 	var/generate_map = 0
 	var/no_click_cooldown = 0
@@ -158,6 +160,8 @@ var/list/gamemode_cache = list()
 	var/alien_delay = 0
 	var/slime_delay = 0
 	var/animal_delay = 0
+
+	var/prisonlist_enabled = 0
 
 	var/footstep_volume = 0
 
@@ -668,6 +672,9 @@ var/list/gamemode_cache = list()
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("disable_karma")
+					disable_karma = 1
 /*
 				if("station_levels")
 					using_map.station_levels = text2numlist(value, ";")
@@ -728,6 +735,9 @@ var/list/gamemode_cache = list()
 
 				if("aggressive_changelog")
 					config.aggressive_changelog = 1
+
+				if("prisonlist_enabled")
+					config.prisonlist_enabled = 1
 
 				if("default_language_prefixes")
 					var/list/values = splittext(value, " ")

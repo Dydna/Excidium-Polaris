@@ -282,6 +282,25 @@
 			if("constructwraith")	M.change_mob_type( /mob/living/simple_animal/construct/wraith , null, null, delmob )
 			if("shade")				M.change_mob_type( /mob/living/simple_animal/shade , null, null, delmob )
 
+	else if(href_list["remove"])
+		var/ckeyname = href_list["remove"]
+		ckeyname = ckey(ckeyname)
+
+		bwhitelist_remove(ckeyname)
+		return
+
+	else if(href_list["addtowhitelist"])
+		var/ckeyname = href_list["ckeyname"]
+		ckeyname = ckey(ckeyname)
+
+		bwhitelist_save(ckeyname)
+		return
+
+	else if(href_list["whitelistsearchckey"])
+		var/playerckey = href_list["whitelistsearchckey"]
+
+		bwhitelist_panel(playerckey)
+		return
 
 	/////////////////////////////////////new ban stuff
 	else if(href_list["unbanf"])
@@ -823,6 +842,10 @@
 				if(check_rights(R_MOD, 0) && !check_rights(R_BAN, 0) && mins > config.mod_tempban_max)
 					usr << "<span class='warning'>Moderators can only job tempban up to [config.mod_tempban_max] minutes!</span>"
 					return
+				if(mins >= 1440)
+					switch(alert("Remove player from whitelist?",, "Yes","No"))
+						if("Yes")
+							bwhitelist_remove(ckey(M.mind.key))
 				if(mins >= 525600) mins = 525599
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)
 				if(!reason)
@@ -912,6 +935,29 @@
 		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
 		dat += {"Now: [secret_force_mode]"}
 		usr << browse(dat, "window=f_secret")
+
+	else if(href_list["whitelisttoggle"])
+		if(!check_rights(R_ADMIN))	return
+
+		var/mob/living/P = locate(href_list["whitelisttoggle"])
+		if(!P.client)
+			to_chat(usr, "<span class='warning'>[P] doesn't seem to have an active client.</span>")
+			return
+
+		if(check_prisonlist(P.client))
+			if(alert(usr, "Player listed in the whitelist. Remove [key_name(P)] from the whitelist?", "Message", "Yes", "No") != "Yes")
+				return
+			bwhitelist_remove(ckey(P.mind.key))
+			P.client.prefs.whitelist = 0
+		if(!check_prisonlist(P.client))
+			if(alert(usr, "Player NOT listed in the whitelist. Add [key_name(P)] to the whitelist?", "Message", "Yes", "No") != "Yes")
+				return
+			if(!check_rights(R_PERMISSIONS))
+				to_chat(usr, "<span class='warning'>ONLY SECRETARY AND HIGHER RANKS CAN ADD PLAYERS INTO WHITELIST.</span>")
+				message_admins("[key_name_admin(src.owner)] doesn't have rights to add players into whitelist.")
+			else
+				bwhitelist_save(ckey(P.mind.key))
+				P.client.prefs.whitelist = 1
 
 	else if(href_list["c_mode2"])
 		if(!check_rights(R_ADMIN|R_SERVER))	return
