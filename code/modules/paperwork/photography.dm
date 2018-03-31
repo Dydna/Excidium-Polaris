@@ -43,7 +43,7 @@ var/global/photo_count = 0
 
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen))
-		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
+		var/txt = sanitize(input_utf8(user, "What would you like to write on the back?", "Photo Writing", null), 128)
 		if(loc == user && user.stat == 0)
 			scribble = txt
 	..()
@@ -136,7 +136,7 @@ var/global/photo_count = 0
 /obj/item/device/camera/verb/change_size()
 	set name = "Set Photo Focus"
 	set category = "Object"
-	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
+	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3)
 	if(nsize)
 		size = nsize
 		usr << "<span class='notice'>Camera will now take [size]x[size] photos.</span>"
@@ -252,8 +252,8 @@ var/global/photo_count = 0
 
 /obj/item/device/camera/proc/can_capture_turf(turf/T, mob/user)
 	var/viewer = user
-	if(user.client)		//To make shooting through security cameras possible
-		viewer = user.client.eye
+	//if(user.client)		//To make shooting through security cameras possible
+		//viewer = user.client.eye
 	var/can_see = (T in view(viewer))
 
 	return can_see

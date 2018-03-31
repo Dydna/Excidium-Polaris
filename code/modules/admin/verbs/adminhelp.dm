@@ -35,6 +35,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/list/surnames = list()
 	var/list/forenames = list()
 	var/list/ckeys = list()
+	var/pure_msg = msg
 	for(var/mob/M in mob_list)
 		var/list/indexing = list(M.real_name, M.name)
 		if(M.mind)	indexing += M.mind.name
@@ -80,6 +81,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 							msg += "<b><font color='black'>[original_word] (<A HREF='?_src_=holder;adminmoreinfo=\ref[found]'>?</A>)</font></b> "
 							continue
 			msg += "[original_word] "
+
+		msg = pure_msg
 
 	if(!mob) //this doesn't happen
 		return

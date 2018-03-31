@@ -19,6 +19,9 @@
 	S["job_engsec_med"]		>> pref.job_engsec_med
 	S["job_engsec_low"]		>> pref.job_engsec_low
 	S["player_alt_titles"]	>> pref.player_alt_titles
+	S["job_karma_high"]		>> pref.job_karma_high
+	S["job_karma_med"]		>> pref.job_karma_med
+	S["job_karma_low"]		>> pref.job_karma_low
 
 /datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
 	S["alternate_option"]	<< pref.alternate_option
@@ -32,6 +35,9 @@
 	S["job_engsec_med"]		<< pref.job_engsec_med
 	S["job_engsec_low"]		<< pref.job_engsec_low
 	S["player_alt_titles"]	<< pref.player_alt_titles
+	S["job_karma_high"]		<< pref.job_karma_high
+	S["job_karma_med"]		<< pref.job_karma_med
+	S["job_karma_low"]		<< pref.job_karma_low
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	pref.alternate_option	= sanitize_integer(pref.alternate_option, 0, 2, initial(pref.alternate_option))
@@ -44,6 +50,9 @@
 	pref.job_engsec_high	= sanitize_integer(pref.job_engsec_high, 0, 65535, initial(pref.job_engsec_high))
 	pref.job_engsec_med 	= sanitize_integer(pref.job_engsec_med, 0, 65535, initial(pref.job_engsec_med))
 	pref.job_engsec_low 	= sanitize_integer(pref.job_engsec_low, 0, 65535, initial(pref.job_engsec_low))
+	pref.job_karma_high = sanitize_integer(pref.job_karma_high, 0, 65535, initial(pref.job_karma_high))
+	pref.job_karma_med = sanitize_integer(pref.job_karma_med, 0, 65535, initial(pref.job_karma_med))
+	pref.job_karma_low = sanitize_integer(pref.job_karma_low, 0, 65535, initial(pref.job_karma_low))
 	if(!(pref.player_alt_titles)) pref.player_alt_titles = new()
 
 	if(!job_master)
@@ -90,6 +99,9 @@
 		if(!job.player_old_enough(user.client))
 			var/available_in_days = job.available_in_days(user.client)
 			. += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
+			continue
+		if(!is_job_whitelisted(user, rank))
+			. += "<font color=red>[rank]</font></td><td><font color=red><b> \[KARMA]</b></font></td></tr>"
 			continue
 		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
 			. += "<del>[rank]</del></td><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
@@ -205,14 +217,17 @@
 			pref.job_civilian_high = 0
 			pref.job_medsci_high = 0
 			pref.job_engsec_high = 0
+			pref.job_karma_high = 0
 			return 1
 		if(2)//Set current highs to med, then reset them
 			pref.job_civilian_med |= pref.job_civilian_high
 			pref.job_medsci_med |= pref.job_medsci_high
 			pref.job_engsec_med |= pref.job_engsec_high
+			pref.job_karma_med |= pref.job_karma_high
 			pref.job_civilian_high = 0
 			pref.job_medsci_high = 0
 			pref.job_engsec_high = 0
+			pref.job_karma_high = 0
 
 	switch(job.department_flag)
 		if(CIVILIAN)
@@ -245,6 +260,16 @@
 					pref.job_engsec_low &= ~job.flag
 				else
 					pref.job_engsec_low |= job.flag
+		if(KARMA)
+			switch(level)
+				if(2)
+					pref.job_karma_high = job.flag
+					pref.job_karma_med &= ~job.flag
+				if(3)
+					pref.job_karma_med |= job.flag
+					pref.job_karma_low &= ~job.flag
+				else
+					pref.job_karma_low |= job.flag
 	return 1
 
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
@@ -259,6 +284,11 @@
 	pref.job_engsec_high = 0
 	pref.job_engsec_med = 0
 	pref.job_engsec_low = 0
+
+	pref.job_karma_high = 0
+	pref.job_karma_med = 0
+	pref.job_karma_low = 0
+
 
 	pref.player_alt_titles.Cut()
 
@@ -292,4 +322,12 @@
 					return job_engsec_med
 				if(3)
 					return job_engsec_low
+		if(KARMA)
+			switch(level)
+				if(1)
+					return job_karma_high
+				if(2)
+					return job_karma_med
+				if(3)
+					return job_karma_low
 	return 0

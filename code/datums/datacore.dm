@@ -220,6 +220,29 @@
 			S.fields["brain_type"] = "Organic"
 		if(H.sec_record && !jobban_isbanned(H, "Records"))
 			S.fields["notes"] = H.sec_record
+			if(!check_prisonlist(H.client))
+				var/list/commited_crime_major = list("Public Enemy",
+					"Bank Robber",
+					"Murderer",
+					"Maniac",
+					"Terrorist",
+					"Gang Boss",
+					"None",
+					"None",
+					"Smuggler",
+					"Kidnapper")
+				var/commited_crime_minor = list("Arsonist",
+					"Blackmailer",
+					"Shoplifter",
+					"Hijacker",
+					"Pickpocket",
+					"Thief",
+					"Vandal")
+				S.fields["criminal"]	= "Incarcerated"
+				S.fields["mi_crim"]		= "[pick(commited_crime_minor)]"
+				S.fields["mi_crim_d"]	= "Do not try to release."
+				S.fields["ma_crim"]		= "[pick(commited_crime_major)]"
+				S.fields["ma_crim_d"]	= "Convicted by NT to Permabrig Sentence"
 
 		//Locked Record
 		var/datum/data/record/L = new()

@@ -240,6 +240,8 @@ var/list/gear_datums = list()
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 	var/exploitable = 0		//Does it go on the exploitable information list?
 	var/type_category = null
+	var/wl_id
+	var/donor_only = FALSE // if it's only available to donors
 
 /datum/gear/New()
 	..()

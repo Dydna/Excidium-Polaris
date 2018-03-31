@@ -9,6 +9,7 @@
 	S["ooccolor"]		>> pref.ooccolor
 	S["tooltipstyle"]	>> pref.tooltipstyle
 
+
 /datum/category_item/player_setup_item/player_global/ui/save_preferences(var/savefile/S)
 	S["UI_style"]		<< pref.UI_style
 	S["UI_style_color"]	<< pref.UI_style_color

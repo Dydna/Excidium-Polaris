@@ -89,13 +89,13 @@ proc/get_radio_key_from_channel(var/channel)
 //Takes a list of the form list(message, verb, whispering) and modifies it as needed
 //Returns 1 if a speech problem was applied, 0 otherwise
 /mob/living/proc/handle_speech_problems(var/list/message_data)
-	var/message = message_data[1]
+	var/message = rhtml_decode(message_data[1])
 	var/verb = message_data[2]
 	var/whispering = message_data[3]
 	. = 0
 
 	if((HULK in mutations) && health >= 25 && length(message))
-		message = "[uppertext(message)]!!!"
+		message = "[ruppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		whispering = 0
 		. = 1
@@ -108,7 +108,7 @@ proc/get_radio_key_from_channel(var/channel)
 		verb = pick("stammers","stutters")
 		. = 1
 
-	message_data[1] = message
+	message_data[1] = russian_to_cp1251(message)
 	message_data[2] = verb
 	message_data[3] = whispering
 
