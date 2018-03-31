@@ -253,7 +253,6 @@
 						else
 							src.DB_species_unlock("Vulpkanin",75)
 							return
-
 			if(href_list["KarmaBuy3"])
 				var/karma=verify_karma()
 				switch(href_list["KarmaBuy3"])
@@ -368,7 +367,6 @@
 							src.DB_item_unlock("5005", 5)
 							src.DB_item_unlock("5006", 5)
 							src.DB_item_unlock("5007", 5)
-
 
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder

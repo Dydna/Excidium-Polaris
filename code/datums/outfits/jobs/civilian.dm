@@ -103,11 +103,3 @@
 	r_pocket = /obj/item/device/gps/explorer
 	id_pda_assignment = "Explorer"
 
-
-/decl/hierarchy/outfit/job/prisoner
-	name = OUTFIT_JOB_NAME("D-class")
-	shoes = /obj/item/clothing/shoes/orange
-	uniform = /obj/item/clothing/under/color/orange
-	pda_slot = slot_belt
-	pda_type = /obj/item/device/pda
-
