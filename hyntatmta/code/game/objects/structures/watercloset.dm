@@ -1,4 +1,4 @@
-#define NISHTYAK_DELAY 1200
+/*#define NISHTYAK_DELAY 1200
 /obj/structure/toilet/parasha
   name = "BIDLOparasha X-1337"
   desc = "Cоздано при помощи древней технологии, чье истинное назначение так и осталось неопознанным. Чистите вилкой и получите свою награду."
@@ -126,3 +126,4 @@
   return 1
 
 #undef NISHTYAK_DELAY
+*/
