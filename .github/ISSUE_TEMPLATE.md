@@ -1,11 +1,11 @@
-#### Brief description of the issue
+#### Краткое описание проблемы:
 
-#### What you expected to happen
+#### Что должно было произойти:
 
-#### What actually happened
+#### Что произошло вместо этого:
 
-#### Steps to reproduce
+#### Детальное описание как повторить возникновение проблемы:
 
-#### Additional info:
- - **Server Revision**: Found using the "Show Server Revision" verb under the OOC tab.
- - **Anything else you may wish to add** (Location if it's a mapping issue, etc)
+#### Дополнительная информация:
+ - **Server Revision**: Находится с помощью верба "Snow Server Revision" во вкладке OOC.
+ - **Что-нибудь еще, что может помочь** (Локация если это проблема с картой и т.д)
