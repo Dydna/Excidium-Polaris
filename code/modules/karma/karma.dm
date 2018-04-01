@@ -266,7 +266,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 	dat += "<HR>"
 
 	switch(karma_tab)
-	/*
+
 		if(0) // Job Unlocks
 			dat += {"
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy=1'>Unlock Barber -- 5KP</a><br>
@@ -295,7 +295,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=14'>Unlock Vulpkanin -- 75KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=8'>Unlock Unathi -- 80KP</a><br>
 			"}
-	*/
+
 		if(2) // Item Unlocks
 			dat += {"
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy3=4001'>Unlock Dio Brando's costume -- 5KP</a><br>
@@ -507,7 +507,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 
 	else
 <<<<<<< HEAD
-		to_chat(usr, "\red Your ckey ([dbckey]) was not found.")
+		to_chat(usr, "<font color='red'>Your ckey ([dbckey]) was not found.</font>")
 */
 /client/proc/checkpurchased(var/name = null) // If the first parameter is null, return a full list of purchases
 	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM [format_table_name("whitelist")] WHERE ckey='[usr.ckey]'")

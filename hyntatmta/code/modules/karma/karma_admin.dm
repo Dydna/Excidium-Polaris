@@ -48,7 +48,7 @@ proc/sql_report_admin_karma(var/client/spender, var/receiver_key, var/karma_give
 	for(var/client/C in clients)
 		karma_list += C
 	if(!karma_list.len || karma_list.len == 1)
-		to_chat(usr, "\red There's no-one to spend your karma on.")
+		to_chat(usr, "<font color='red'>There's no-one to spend your karma on.</font>")
 		return
 
 	var/pickedclient = input("Who would you like to award Karma to?", "Give Karma", "Write ckey manually") as null|anything in karma_list

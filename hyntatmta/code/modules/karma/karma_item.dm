@@ -42,7 +42,7 @@
 	if(check_rights(R_ADMIN, 0))
 		return 1
 	if(!dbcon.IsConnected())
-		to_chat(usr, "\red Unable to connect to whitelist database. Please try again later.<br>")
+		to_chat(usr, "<font color='red'>Unable to connect to whitelist database. Please try again later.<br></font>")
 		return 0
 	else
 		var/DBQuery/query = dbcon.NewQuery("SELECT item_id FROM [format_table_name("whitelist")] WHERE ckey='[ckey]'")
