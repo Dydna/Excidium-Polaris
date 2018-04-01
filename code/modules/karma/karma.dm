@@ -280,7 +280,6 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 
 		if(1) // Species Unlocks
 			dat += {"
-
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=10'>Unlock Diona -- 25KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=1'>Unlock Machine People -- 30KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=7'>Unlock Drask -- 30KP</a><br>
@@ -320,7 +319,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			"}
 
 	dat += "<br><B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>"
-	dat += "</center></body></html>"
+	dat += "<center><body><html>"
 
 	var/datum/browser/popup = new(usr, "karmashop", "<div align='center'>Karma Shop</div>", 400, 400)
 	popup.set_content(dat)
