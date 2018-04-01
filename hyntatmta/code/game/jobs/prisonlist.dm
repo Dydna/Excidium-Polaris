@@ -17,7 +17,7 @@ var/list/bwhitelist
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr, "\red Failed to establish database connection")
+		to_chat(usr, "<font color='red'>Failed to establish database connection</font>")
 		return
 
 	var/output = "<div align='center'><table><tr>"
@@ -141,7 +141,7 @@ var/list/bwhitelist
 		log_game("SQL ERROR during loading player preferences. Error : \[[err]\]\n")
 		message_admins("SQL ERROR during loading player preferences. Error : \[[err]\]\n")
 		return 0
-	to_chat(usr, "\blue Ckey saved to database.")
+	to_chat(usr, "<font color='blue'>Ckey saved to database.</font>")
 	message_admins("[key_name_admin(usr)] has added [ckeyname] to the whitelist.",1)
 	for(var/client/C in clients)
 		//log_debug("Clients C.ckey: [C.ckey]")
@@ -160,7 +160,7 @@ var/list/bwhitelist
 		log_game("SQL ERROR during loading player preferences. Error : \[[err]\]\n")
 		message_admins("SQL ERROR during loading player preferences. Error : \[[err]\]\n")
 		return 0
-	to_chat(usr, "\blue Ckey removed from database.")
+	to_chat(usr, "<font color='blue'>Ckey removed from database.</font>")
 	message_admins("[key_name_admin(usr)] has removed [ckeyname] from the whitelist.",1)
 	for(var/client/C in clients)
 		if(ckey(C.ckey) == ckey(ckeyname))

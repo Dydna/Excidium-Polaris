@@ -257,13 +257,16 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 
 /client/proc/karmashopmenu()
 	var/dat = "<html><body><center>"
+	/*
 	dat += "<a href='?src=[UID()];karmashop=tab;tab=0' [karma_tab == 0 ? "class='linkOn'" : ""]>Job Unlocks</a>"
 	dat += "<a href='?src=[UID()];karmashop=tab;tab=1' [karma_tab == 1 ? "class='linkOn'" : ""]>Species Unlocks</a>"
+	*/
 	dat += "<a href='?src=[UID()];karmashop=tab;tab=2' [karma_tab == 2 ? "class='linkOn'" : ""]>Item Unlocks</a>"
 	dat += "</center>"
 	dat += "<HR>"
 
 	switch(karma_tab)
+
 		if(0) // Job Unlocks
 			dat += {"
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy=1'>Unlock Barber -- 5KP</a><br>
@@ -277,7 +280,6 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 
 		if(1) // Species Unlocks
 			dat += {"
-
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=10'>Unlock Diona -- 25KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=1'>Unlock Machine People -- 30KP</a><br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy2=7'>Unlock Drask -- 30KP</a><br>
@@ -315,9 +317,6 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy3=0002'>Unlock Sergeant's Helmet -- 40KP</a>(for Head of Security and Warden only)<br>
 			<a href='?src=[UID()];karmashop=shop;KarmaBuy3=0003'>Unlock Victorian Clothes -- 40KP</a><br>
 			"}
-
-	dat += "<br><B>PLEASE NOTE THAT PEOPLE WHO TRY TO GAME THE KARMA SYSTEM WILL END UP ON THE WALL OF SHAME. THIS INCLUDES BUT IS NOT LIMITED TO TRADES, OOC KARMA BEGGING, CODE EXPLOITS, ETC.</B>"
-	dat += "</center></body></html>"
 
 	var/datum/browser/popup = new(usr, "karmashop", "<div align='center'>Karma Shop</div>", 400, 400)
 	popup.set_content(dat)
@@ -508,7 +507,7 @@ You've gained <b>[totalkarma]</b> total karma in your time here.<br>"}
 
 	else
 <<<<<<< HEAD
-		to_chat(usr, "\red Your ckey ([dbckey]) was not found.")
+		to_chat(usr, "<font color='red'>Your ckey ([dbckey]) was not found.</font>")
 */
 /client/proc/checkpurchased(var/name = null) // If the first parameter is null, return a full list of purchases
 	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM [format_table_name("whitelist")] WHERE ckey='[usr.ckey]'")

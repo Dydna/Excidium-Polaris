@@ -67,10 +67,10 @@ var/global/sent_doomstrike_team = 0
 
 			//So they don't forget their code or mission.
 			if(nuke_code)
-				new_doomguy.mind.store_memory("<B>Nuke Code:</B> \red [nuke_code].")
-			new_doomguy.mind.store_memory("<B>Mission:</B> \red [input].")
+				new_doomguy.mind.store_memory("<B>Nuke Code:</B> <font color='red'>[nuke_code].</font>")
+			new_doomguy.mind.store_memory("<B>Mission:</B> <font color='red'>[input].</font>")
 
-			to_chat(new_doomguy, "\blue You are a Special Ops. [!leader_selected?"commando":"<B>LEADER</B>"] in the service of Central Command. Check the table ahead for detailed instructions.\nYour current mission is: \red<B>[input]</B>")
+			to_chat(new_doomguy, "<font color='blue'>You are a Special Ops. [!leader_selected?"commando":"<B>LEADER</B>"] in the service of Central Command. Check the table ahead for detailed instructions.\nYour current mission is:</font> <font color='red'><B>[input]</B></font>")
 
 			commando_number--
 
@@ -92,7 +92,7 @@ var/global/sent_doomstrike_team = 0
 			new /obj/effect/spawner/newbomb/timer/syndicate(L.loc)
 			qdel(L)
 
-	message_admins("\blue [key_name_admin(usr)] has spawned a CentComm strike squad.", 1)
+	message_admins("<font color='blue'>[key_name_admin(usr)] has spawned a CentComm strike squad.</font>", 1)
 	log_admin("[key_name(usr)] used Spawn Death Squad.")
 	return 1
 
