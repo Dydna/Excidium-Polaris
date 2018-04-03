@@ -406,7 +406,7 @@ STARLIGHT 0
 # UNCOMMENT THIS IF YOU WANT TO USE EXCIDIUM WHITELIST
 # Non-whitelisted spawns as D-class prisoners in Prison Wing
 # They cannot use OOC and can't join as drone
-PRISONLIST_ENABLED
+#PRISONLIST_ENABLED
 
 ## Uncomment this to disable karma and unlock all karma purchases for players by default
 #DISABLE_KARMA
