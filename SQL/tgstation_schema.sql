@@ -94,6 +94,21 @@ AUTO_INCREMENT = 2544
 DEFAULT CHARACTER SET = latin1;
 
 
+-- -----------------------------------------------------
+-- Table `tgstation`.`whitelist`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `tgstation`.`whitelist` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `ckey` TEXT NOT NULL,
+  `job` TEXT,
+  `species` TEXT,
+  `item_id` TEXT,
+  PRIMARY KEY (`id`))
+ENGINE=MyISAM
+AUTO_INCREMENT=877
+DEFAULT CHARSET=latin1;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
